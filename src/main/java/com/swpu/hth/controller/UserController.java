@@ -29,7 +29,6 @@ public class UserController {
     //登录
     @PostMapping("/login")
     public String login(@RequestParam("username") String username, @RequestParam("pwd") String pwd) throws Exception{
-        int i=1;
         return userService.login(username,pwd);
     }
 
