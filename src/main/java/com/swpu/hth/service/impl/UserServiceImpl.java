@@ -35,10 +35,10 @@ public class UserServiceImpl implements UserService {
     public String login(String username,String pwd) throws Exception{
         UserDO userDOL = userDao.login(username);
         if(userDOL==null){
-            return "用户名不存在";
+            return "user isn't exists";
         }
         if(userDOL.getPwd().equals(pwd)){
-            return "successed";
+            return "success";
         }
         return "failed";
     }

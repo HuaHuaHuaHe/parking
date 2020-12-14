@@ -1,7 +1,6 @@
 package com.swpu.hth.dao;
 
 import com.swpu.hth.entity.StateDO;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

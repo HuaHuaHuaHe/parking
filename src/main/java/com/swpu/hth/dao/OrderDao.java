@@ -17,7 +17,7 @@ public interface OrderDao {
      */
     @Insert("INSERT INTO orders (username, license, time_re, r1, tr, lat, lng) VALUES (#{username}, #{license}, #{time_re}, #{r1}, #{tr}, #{lat}, #{lng})")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
-    void saveOrderRe(OrderReDO order);
+    int saveOrderRe(OrderReDO order);
 
     @Update("update orders set lat = #{lat},lng = #{lng} where id = #{id}")
     void updateOrder(double lat,double lng, int id);
@@ -25,7 +25,9 @@ public interface OrderDao {
     @Update("update orders set tr = #{tr} where id = #{id}")
     void updateOrders(int tr, int id);
 
+    @Select("Select * from orders where username=#{username} and license=#{license}")
+    OrderReDO qureyOrder(String username,String license);
+
     @Select("Select * from orders")
     ArrayList<OrderReDO> qureyOrders();
-
 }

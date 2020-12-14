@@ -70,7 +70,7 @@ public class OrderController {
      * @throws Exception
      */
     @PostMapping("/createOrder")
-    public void saveOrder(@RequestParam("username") String username,
+    public String saveOrder(@RequestParam("username") String username,
                              @RequestParam("license") String license,
                              @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam("time_re") String time_re,
                              @RequestParam float r1,
@@ -79,26 +79,11 @@ public class OrderController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = simpleDateFormat.parse(time_re);
         System.out.println(date);
+        float tr = 2.0f;
+        int x = orderService.createOrder(username,license,date,r1,tr,lat,lng);
+        if(x == 1) return "success";
+        return "failed";
 
-        String [] yan ={
-                "1","2","3","4","5","6","7","8","9","0",
-                "A","B","C","D","E","F","G","H",
-                "I","J","K","L","M","N","O","P","Q",
-                "R","S","T","U","V","W","X","Y","Z",};
-        int a,b,c,d,e,tr;
-
-        for (int i=0;i<300;i++){
-            a = (int)(Math.random()*36);
-            b = (int)(Math.random()*36);
-            c = (int)(Math.random()*36);
-            d = (int)(Math.random()*36);
-            e = (int)(Math.random()*36);
-            String yanzhengma = yan[a]+yan[b]+yan[c]+yan[d]+yan[e];
-            String license1;
-            license1 = license+yanzhengma;
-            tr = (int)Math.random()*2+1;
-            orderService.createOrder(username,license1,date,r1,tr,lat,lng);
-        }
 
 
 //        List<ParkingLotInfoDO> parkingLotInfoDOList = parkingLotInfoService.queryParkingLotInfo();
@@ -112,6 +97,18 @@ public class OrderController {
 //        sortStackByStack(stack);
 //        System.out.println(stack);
 
+    }
+
+    /**
+    *  查询用户是否有订单
+    * */
+    @PostMapping("/queryOrder")
+    public String queryOrder(@RequestParam("username") String username,
+                             @RequestParam("license") String license) throws Exception {
+        System.out.println(username+"--"+license);
+        OrderReDO mOrderReDO = orderService.queryOrder(username,license);
+        if(null == mOrderReDO) {return "null";}
+        return "exist";
     }
 
     /**

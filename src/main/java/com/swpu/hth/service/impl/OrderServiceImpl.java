@@ -20,9 +20,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @DS(value = "all-ds")
     @GlobalTransactional
-    public void createOrder(String username, String license, Date time_re, float r1, float tr, double lat, double lng) throws Exception {
+    public int createOrder(String username, String license, Date time_re, float r1, float tr, double lat, double lng) throws Exception {
         OrderReDO orderre = new OrderReDO().setUsername(username).setLicense(license).setTime_re(time_re).setR1(r1).setTr(tr).setLat(lat).setLng(lng);
-        orderDao.saveOrderRe(orderre);
+        return orderDao.saveOrderRe(orderre);
     }
 
     @Override
@@ -36,8 +36,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public OrderReDO queryOrder(String username, String license) throws Exception {
+        return orderDao.qureyOrder(username, license);
+    }
+
+    @Override
     public ArrayList<OrderReDO> queryReOrder() throws Exception {
         return orderDao.qureyOrders();
     }
+
 
 }
