@@ -30,7 +30,7 @@ public interface StateDao {
      *查询单个车位方法
      *
      */
-    @Select("select * from state_swpu  where spot_id = #{spot_id}")
+    @Select("select * from state_swpu where spot_id = #{spot_id}")
     StateDO query(int spot_id);
 
     /**
