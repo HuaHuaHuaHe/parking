@@ -21,6 +21,9 @@ public class ChargeServiceImpl implements ChargeService {
 
     @Override
     public List<ChargeDO> queryByName(String username) throws Exception {
-        return chargeDao.queryByName(username);
+        List<ChargeDO> chargeDOList = chargeDao.queryByName(username);
+        System.out.println(chargeDOList.get(0).getTime_re()+"--"+"date");
+        System.out.println(chargeDOList.get(0).getSpot_id()+"--"+"id");
+        return chargeDOList;
     }
 }

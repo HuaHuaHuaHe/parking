@@ -41,3 +41,5 @@ public interface StateDao {
     @Select("select * from state_"+"#{parking_lot_name}")
     List<StateDO> queryAll(String parking_lot_name);
 }
+
+
